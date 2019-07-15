@@ -1,9 +1,18 @@
 import ACTIONS from "../actions/actions";
-const addPerson = (state, action) => {
+
+const initialState = {
+  persons: []
+};
+
+const addPerson = (state = initialState, action) => {
   if (action.type === ACTIONS.ADD) {
-    return { ...state };
+    return { persons: state.persons.concat(action.newPerson) };
   }
   if (action.type === ACTIONS.REMOVE) {
-    return { ...state };
+    return { persons: state.persons.filter(person => person.id !== action.id) };
   }
+
+  return { ...state };
 };
+
+export default addPerson;
